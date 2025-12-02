@@ -21,7 +21,7 @@ Analysing how sequential multi-agent AI pipelines suffer from **compounding erro
    - Small improvements in agent accuracy lead to exponential system gains
    - Multiplicative ratio: `(1 + Δp/p)^n` grows exponentially
 
-## 🐍 Python Script Features
+## Python Script Features
 
 The script `Analysis.py` provides:
 
@@ -61,7 +61,7 @@ Shows how system accuracy drops as more agents are added, for different accuracy
 1. **Exponential Decay**: System accuracy vs number of agents for different base accuracies
 2. **Improvement Ratios**: Shows exponential gains from feedback mechanisms
 
-## 🎯 Key Insights
+##  Key Insights
 
 1. **Compounding Error Problem**
    - 90% per agent → only 59% for 5 agents
@@ -83,7 +83,7 @@ Shows how system accuracy drops as more agents are added, for different accuracy
    - Feedback is provably optimal for scaling multi-agent systems
    - Small improvements compound exponentially
 
-## 🔬 Mathematical Examples
+##  Mathematical Examples
 
 ### Example 1: Exponential Decay
 ```python
