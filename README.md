@@ -1,108 +1,127 @@
 # Sequential Agentic AI Pipeline Reliability Analysis
 
-This repository contains a detailed Python implementation of the mathematical concepts of Improving Reliability in Sequential Agentic AI Pipelines Through Feedback.
+This repository provides a mathematical and computational analysis of **how error compounds in multi-agent AI pipelines**, and how feedback-based mechanisms can significantly improve system performance.
 
-## Summary
+## Overview
 
-Analysing how sequential multi-agent AI pipelines suffer from **compounding error** - even when each agent performs with high individual accuracy, the end-to-end system accuracy degrades exponentially with pipeline depth.
+In agentic AI systems, multiple agents are arranged **sequentially** — where the output of one agent becomes the input of the next.  
+Even if each agent is highly accurate individually, the **end-to-end accuracy degrades exponentially** as the pipeline gets deeper.
 
-### Key Mathematical Concepts
+This repository explores:
 
-1. **System Accuracy Formula**: `A(p) = p^n`
-   - `p` = individual agent accuracy
-   - `n` = number of agents in pipeline
-   - Result: Exponential decay
+- Mathematical analysis of sequential agent accuracy  
+- Why compounding error happens  
+- How feedback improves reliability  
+- Simulation + visualizations  
+- Strategies for designing robust agent pipelines  
 
-2. **Derivative**: `A'(p) = n * p^(n-1)`
-   - Shows system accuracy increases with better agents
-   - But slope shrinks rapidly as `n` increases
+## Mathematical Foundations
 
-3. **Improvement with Feedback**: `ΔA ≈ n * p^(n-1) * Δp`
-   - Small improvements in agent accuracy lead to exponential system gains
-   - Multiplicative ratio: `(1 + Δp/p)^n` grows exponentially
+### **1. System Accuracy Formula**
 
-## Python Script Features
+For a pipeline of **n agents**, each with accuracy **p**:
 
-The script `Analysis.py` provides:
+\[
+A(p) = p^n
+\]
 
-### 1. **AgenticPipelineAnalyzer Class**
-- Calculate system accuracy for any pipeline configuration
-- Demonstrate exponential decay patterns
-- Perform sensitivity analysis
-- Compare improvement strategies
-- Generate visualizations
+Meaning:
 
-### 2. **FeedbackMechanism Class**
-Implements various feedback strategies:
-- **Verification**: Second agent checks first agent's output
-- **Retry**: Multiple attempts if first fails
-- **Self-checking**: Agent validates its own output
+- 90% per agent over 5 agents → **59.05%**
+- 90% per agent over 10 agents → **34.87%**
 
-### 3. **Key Demonstrations**
+---
 
-#### Example
-```
-Pipeline: 5 agents at 90% accuracy
-- Without feedback: 59.05% system accuracy
-- With feedback (95%): 77.38% system accuracy
-- Result: 31% improvement from just 5-point increase per agent!
-```
+### **2. Derivative (Sensitivity)**
 
-#### Exponential Decay Visualization
-Shows how system accuracy drops as more agents are added, for different accuracy levels.
+\[
+A'(p) = n \cdot p^{n-1}
+\]
 
-#### Strategy Comparison
-- **Strategy 1**: Reduce number of agents (loses functionality)
-- **Strategy 2**: Improve accuracy with feedback (optimal!)
+Shows how system accuracy changes when a single agent improves.
+
+---
+
+### **3. Feedback Based Improvement**
+
+If each agent improves by a small Δp:
+
+\[
+\Delta A \approx n \cdot p^{n-1} \cdot \Delta p
+\]
+
+Small improvements → **exponentially large system gains**.
+
+---
+
+## Key Insights
+
+### **1. Compounding Error is Severe**
+| Agents | Accuracy per Agent | System Accuracy |
+|--------|---------------------|------------------|
+| 5 | 90% | **59%** |
+| 10 | 90% | **34%** |
+| 5 | 80% | **32%** |
+
+---
+
+### **2. Feedback is the Optimal Solution**
+
+Improving each agent even slightly results in exponential benefit:
+
+\[
+0.95^5 = 77.38\%
+\]
+vs  
+\[
+0.90^5 = 59.05\%
+\]
+
+This is a **31% improvement** from just +5% per agent!
+
+---
+
+### **3. Reducing Number of Agents Is Not Ideal**
+
+Removing agents reduces functionality.  
+Feedback increases reliability **without sacrificing capability**.
+
+---
+
+### **4. Best Feedback Techniques**
+- Self-reflection  
+- Verification  
+- Multiple retries  
+- Tool-assisted reasoning  
+- Abstention (“I don’t know”)  
+
+---
+
+## Python Implementation
+
+The script `Analysis.py` includes:
+
+### `AgenticPipelineAnalyzer`
+- Computes sequential accuracy  
+- Sensitivity analysis  
+- Exponential-decay simulation  
+- Visualization generation  
+
+### `FeedbackMechanism`
+- Retry logic  
+- Self-checking  
+- Verification-based boosting  
+- Ensemble of weak learners  
+
+---
+
+## Visualizations
+
+The script produces a visualization showing exponential decay of accuracy with depth.
+
+### **Pipeline Reliability Visualization**
+
+![Pipeline Analysis Visualization](pipeline_analysis_visualization.png)
 
 
-## 📊 Visualizations
 
-1. **Exponential Decay**: System accuracy vs number of agents for different base accuracies
-2. **Improvement Ratios**: Shows exponential gains from feedback mechanisms
-
-##  Key Insights
-
-1. **Compounding Error Problem**
-   - 90% per agent → only 59% for 5 agents
-   - 90% per agent → only 35% for 10 agents
-
-2. **Feedback Solution**
-   - Just 5% improvement per agent = 31%+ system improvement
-   - Works by raising effective accuracy of each agent
-
-3. **Optimal Strategy**
-   - Don't reduce agents (loses capabilities)
-   - Improve accuracy via feedback mechanisms:
-     - Verification
-     - Self-checking
-     - Retries
-     - Abstention
-
-4. **Mathematical Proof**
-   - Feedback is provably optimal for scaling multi-agent systems
-   - Small improvements compound exponentially
-
-##  Mathematical Examples
-
-### Example 1: Exponential Decay
-```python
-# 5 agents at 90% accuracy each
-system_accuracy = 0.9 ** 5 = 0.59049 (59%)
-```
-
-### Example 2: Feedback Impact
-```python
-# Improving from 90% to 95% per agent
-before = 0.9 ** 5 = 0.59049
-after = 0.95 ** 5 = 0.77378
-improvement = 31.04%
-```
-
-### Example 3: Sensitivity
-```python
-# 5 agents, base 90%
-+1% per agent → +5.7% system improvement
-+2% per agent → +11.6% system improvement
-+5% per agent → +31.0% system improvement
-```
