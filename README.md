@@ -99,7 +99,7 @@ Feedback increases reliability **without sacrificing capability**.
 
 ## Python Implementation
 
-The script `Analysis.py` includes:
+The script Analysis.py includes:
 
 ### `AgenticPipelineAnalyzer`
 - Computes sequential accuracy  
