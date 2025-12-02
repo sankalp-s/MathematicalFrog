@@ -99,7 +99,7 @@ Feedback increases reliability **without sacrificing capability**.
 
 ## Python Implementation
 
-The script Analysis.py includes:
+The script [Analysis.py](https://github.com/sankalp-s/MathematicalFrog/blob/main/Analysis.py) includes:
 
 ### `AgenticPipelineAnalyzer`
 - Computes sequential accuracy  
@@ -116,8 +116,6 @@ The script Analysis.py includes:
 ---
 
 ## Visualizations
-
-The script produces a visualization showing exponential decay of accuracy with depth.
 
 ### **Pipeline Reliability Visualization**
 
